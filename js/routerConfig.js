@@ -7,9 +7,7 @@ export default {
         'data': {'route': 'login'},
         'url': 'login',
         'component': LoginComponent,
-        'setings': {
-            login: () => Store.dispatch('login', Store.state)
-        }
+        
     },
     'todoList': {
         'data': {'route': 'todoList'},

@@ -8,7 +8,6 @@ export default class ListComponent extends ParentComponent {
         super(Store, anchor)
         this.setupListeners()
         this.filter = 'all';
-      
     }
 
     onInit() {
@@ -23,6 +22,7 @@ export default class ListComponent extends ParentComponent {
     }
 
     render() {
+        console.log(Store)
         document.querySelector('#main').innerHTML = `
         <div class="todo-list">
         <div class="container">

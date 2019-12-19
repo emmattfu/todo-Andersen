@@ -1,8 +1,6 @@
 import routerConfig from './routerConfig.js';
 import Store from './store/index.js';
 
-
-
 export default class Router {
     constructor(anchor) {
         this.anchor = anchor;
@@ -11,7 +9,7 @@ export default class Router {
           this.changeRoute(e.state.route)
         })
 
-        Store.events.subscribe('move', this.changeRoute.bind(this))
+        Store.events.subscribe('move', this.changeRoute)
 
     }
 
@@ -24,9 +22,14 @@ export default class Router {
         }
         window.history.pushState(conf.data, '', conf.url)
         this.component = new conf.component(this.anchor);
-        console.log(Store)
-        this.component.render()
-     
-    
+      
+        if (conf.url === 'login') {
+            this.component.render()
+        } else {
+          
+            this.component.onInit();
+        }
+       
+
     }
 }

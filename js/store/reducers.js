@@ -42,7 +42,8 @@ export default function createReducers() {
             userInfo : {}
         }),
         move: (payload, state) => {
-            console.log(1)
+            window.dispatchEvent(new CustomEvent('changeRoute', {detail: {route: payload}}));
+            return state
         }
     
     }

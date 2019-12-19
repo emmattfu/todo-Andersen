@@ -57,7 +57,8 @@ class DataBaseWorker {
                   if (resp.token) {
                     Store.dispatch('login', resp);
                     localStorage.setItem('token', resp.token)
-                    window.dispatchEvent(new CustomEvent('changeRoute', {detail: {route: 'todoList'}}));
+                    Store.dispatch('move', 'todoList')
+
                   }
               })
               .catch(err => console.warn(err))
@@ -94,12 +95,11 @@ class DataBaseWorker {
             .then(resp => resp.json())
             .then(resp => {
                 if (resp.token) {
-                   console.log(resp)
-                    Store.dispatch('login', resp);
+                    this.getTodos()
                     localStorage.setItem('token', resp.token)
                   }
             })
-            .then(resp => this.getTodos())
+           
             .catch(err =>  window.dispatchEvent(new CustomEvent('changeRoute', {detail: {route: 'login'}})))
         }
       

@@ -1,13 +1,13 @@
 import store from './store/index.js';
-import DB from './DB-worker.js';
+
 
 export default class ParentComponent {
     constructor(store, anchor) {
-        this.onInit()
+        
         this.anchor = anchor;
         this.superRender = this.render.bind(this)
+        console.log(1)
         store.events.subscribe('change', this.superRender)
-      
     }
 
     onDestroy() {
