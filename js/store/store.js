@@ -5,7 +5,7 @@ export default class Store {
         this.redusers = redusers
         this.state = {
             todos: [],
-            userInfo: {}
+            userInfo: {},
         }
         this.events = new Observer();
 

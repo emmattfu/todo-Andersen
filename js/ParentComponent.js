@@ -6,7 +6,6 @@ export default class ParentComponent {
         
         this.anchor = anchor;
         this.superRender = this.render.bind(this)
-        console.log(1)
         store.events.subscribe('change', this.superRender)
     }
 

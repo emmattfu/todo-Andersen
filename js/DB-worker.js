@@ -1,5 +1,6 @@
 import Store from './store/index.js';
 
+
 class DataBaseWorker {
 
     getTodos() {
@@ -61,13 +62,14 @@ class DataBaseWorker {
 
                   }
               })
-              .catch(err => console.warn(err))
+              .catch(err => {
+                  console.log(err)
+              })
           
             
         }
 
         updateTodo(data, reduser) {
-            console.log(data)
             fetch(`https://todo-app-back.herokuapp.com/todos/${data.id}`, {
                     method: 'PUT',
                     body:

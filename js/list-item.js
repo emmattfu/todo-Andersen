@@ -9,6 +9,7 @@ template.innerHTML = `
     padding: 10px 30px;
     border-radius: 30px;
     margin-top: 20px;
+    margin-left: 10px;
     width: 500px;
     font-size: 18px;
     transition: background-color .2s linear;
@@ -16,11 +17,18 @@ template.innerHTML = `
     justify-content: space-between;
     align-items: center;
     overflow-x:hidden;
+    word-break: break-word;
+    color: #1976D2;
 }
 
 .todo-item[completed="true"] {
   border: 1px solid #29F30E;
   transition: background-color .2s linear;
+  color: #29F30E;
+}
+
+.todo-item-text {
+  padding: 0 10px;
 }
 
 .todo-item[completed="true"]:hover {

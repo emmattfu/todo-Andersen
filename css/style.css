@@ -8,6 +8,7 @@ body{
     padding: 0;
     font: 400 14px/1 'Roboto', sans-serif;
     background-color: #fff;
+    user-select: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -202,10 +203,10 @@ blockquote {
     font-size: 18px;
 }
 
-.todo.list {
+.todo-list {
     max-width: 1040px;
     margin: auto;
-    padding: 0 15px;
+    padding: 0 15px 30px;
 }
 
 .todo-list-inner {
@@ -233,6 +234,42 @@ blockquote {
     font-size: 40px;
     color: #1976D2;
 }
+
+i {
+    font-size: 30px;
+    opacity: 0;
+}
+
+list-item:hover i {
+     opacity: 100%;
+}
+
+.filter-btn {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #1976D2;
+    position: relative;
+}
+
+.filter-btn.active:after {
+    width: 100%
+}
+
+.filter-btn:after {
+    content: "";
+    width: 0;
+    display: block;
+    height: 2px;
+    background-color: #1976D2;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: width .2s linear;
+}
+
+.filter-btn:hover:after {
+    width: 100%;
+}
 /* === todo list styles end === */
 
 /* === todo item styles start === */
@@ -246,13 +283,65 @@ blockquote {
 
 /* === todo item styles end === */
 
-i {
-    font-size: 30px;
+/* === modal styles start === */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+  }
+  
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+  
+  .modal-header .title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 10px 15px;
+  }
+  
+  #overlay {
+    position: fixed;
     opacity: 0;
-}
-
-
-
-list-item:hover i {
-     opacity: 100%;
-}
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+  }
+  
+  #overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+/* === modal styles end === */

@@ -44,7 +44,7 @@ export default function createReducers() {
         move: (payload, state) => {
             window.dispatchEvent(new CustomEvent('changeRoute', {detail: {route: payload}}));
             return state
-        }
+        },
     
     }
 }

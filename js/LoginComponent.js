@@ -1,6 +1,7 @@
 import ParentComponent from './ParentComponent.js';
 import Store from './store/index.js';
 import DB from './DB-worker.js';
+import Modal from './modal.js';
 
 export default class LoginComponent extends ParentComponent {
     constructor(anchor) {
@@ -40,18 +41,21 @@ export default class LoginComponent extends ParentComponent {
 
     login() {
         event.preventDefault();
-            if (this.elements[0].value && this.elements[1].value) {
-                const formData = {
-                    email: this.elements[0].value,
-                    password: this.elements[1].value
-                }
-                DB.login(formData)
+        if (!this.elements[0].value || !this.elements[1].value) {
+            Modal.render('Some field is empty!')
+        }
+         
+        const formData = {
+            email: this.elements[0].value,
+            password: this.elements[1].value
+        }
+        DB.login(formData)
                 
-            } 
+            
     }
 
     setupListeners() {
-        this.anchor.querySelector('form').addEventListener('click', this.login)
+        this.anchor.querySelector('form').addEventListener('submit', this.login)
     }
     
 }

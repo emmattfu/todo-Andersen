@@ -1,6 +1,7 @@
 import Store from "./store/index.js";
 import ParentComponent from './ParentComponent.js';
 import DB from './DB-worker.js';
+import Modal from './modal.js'
 
 
 export default class ListComponent extends ParentComponent {
@@ -13,6 +14,15 @@ export default class ListComponent extends ParentComponent {
     onInit() {
         DB.checkAuth(localStorage.getItem('token'))
         document.querySelector('.logout').classList.remove('d-none')
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            if (this.filter === btn.getAttribute('data')) {
+                btn.classList.add('active')
+            } else {
+                btn.classList.remove('active')
+            }
+        })
+
+        
     }
 
     deleteListeners() {
@@ -22,7 +32,7 @@ export default class ListComponent extends ParentComponent {
     }
 
     render() {
-        console.log(Store)
+     
         document.querySelector('#main').innerHTML = `
         <div class="todo-list">
         <div class="container">
@@ -33,9 +43,9 @@ export default class ListComponent extends ParentComponent {
                         <input class="form-control big" type="text" placeholder="New task">
                         <input class="form-control todo-form-submit" type="submit" value="Add task">
                     </form>
-                    <button data="all">All todos</button>
-                    <button data="finished">Finished</button>
-                    <button data="in-progres">In progres</button>
+                    <button class="filter-btn" data="all">All todos</button>
+                    <button class="filter-btn" data="finished">Finished</button>
+                    <button class="filter-btn" data="in-progres">In progres</button>
                     ${Store.state.todos.length > 0 && this.filter === 'all' ? Store.state.todos.map(todo => `<list-item text="${todo.text}" completed="${todo.completed}" id="${todo._id}">
                        <span slot="done"><i class="far fa-check-circle done"></i></span>
                        <span slot="delete"><i class="far fa-times-circle delete"></i></i></span>
@@ -55,22 +65,30 @@ export default class ListComponent extends ParentComponent {
         </div>
     </div> 
     ` 
-    document.querySelectorAll('button').forEach(el => {
-        el.addEventListener('click', e => {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
             this.filter = e.target.getAttribute('data')
             this.render()
         })
+
+        if (this.filter === btn.getAttribute('data')) {
+            btn.classList.add('active')
+        } else {
+            btn.classList.remove('active')
+        }
     })
+
     }
 
     addTodo() {
         event.preventDefault();
         if (event.target.elements[0].value.length < 5) {
-            alert('Text must be longer than 5 letters')
+            Modal.render('Text must be longer than 5 letters')
             event.target.elements[0].value = ''
             return
         }
         if (Store.state.todos.some(todo =>  todo.text === event.target.elements[0].value)) {
+            Modal.render('We have this task!');
             event.target.elements[0].value = ''
             return
         }
@@ -98,12 +116,13 @@ export default class ListComponent extends ParentComponent {
 
     logout() {
        Store.dispatch('logout', null);
+       document.querySelector('.logout').classList.add('d-none')
        localStorage.removeItem('token')
        window.dispatchEvent(new CustomEvent('changeRoute', {detail: {route: 'login'} }))
     }
 
     setupListeners() {
-     
+        
         this.anchor.addEventListener('submit', this.addTodo)
       
         window.addEventListener('click', this.changeStatus)
