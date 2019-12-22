@@ -108,12 +108,12 @@ blockquote {
 }
 
 .header-logo {
-    margin-left: 40px;
+    margin-left: 100px;
     font-size: 20px;
 }
 
 .logout {
-    margin-right: 150px;
+    margin-right: 100px;
     color: white;
     border: 1px solid white;
     padding: 10px;
@@ -271,17 +271,6 @@ list-item:hover i {
     width: 100%;
 }
 /* === todo list styles end === */
-
-/* === todo item styles start === */
-.todo-item {
-    border: 1px solid #1976D2;
-    padding: 30px;
-    border-radius: 30px;
-    margin-top: 20px;
-    width: 500px;
-}
-
-/* === todo item styles end === */
 
 /* === modal styles start === */
 .modal {

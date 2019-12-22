@@ -21,8 +21,6 @@ export default class ListComponent extends ParentComponent {
                 btn.classList.remove('active')
             }
         })
-
-        
     }
 
     deleteListeners() {
@@ -49,16 +47,16 @@ export default class ListComponent extends ParentComponent {
                     ${Store.state.todos.length > 0 && this.filter === 'all' ? Store.state.todos.map(todo => `<list-item text="${todo.text}" completed="${todo.completed}" id="${todo._id}">
                        <span slot="done"><i class="far fa-check-circle done"></i></span>
                        <span slot="delete"><i class="far fa-times-circle delete"></i></i></span>
-                   </list-item>`).reverse() :  
+                   </list-item>`).reverse().join('') :  
                    Store.state.todos.length > 0 && this.filter === 'finished' ?
                    Store.state.todos.filter(todo => todo.completed).map(todo => `<list-item text="${todo.text}" completed="${todo.completed}" id="${todo._id}">
                    <span slot="done"><i class="far fa-check-circle done"></i></span>
                    <span slot="delete"><i class="far fa-times-circle delete"></i></i></span>
-                   </list-item>`).reverse() : Store.state.todos.length > 0 && this.filter === 'in-progres' ? 
+                   </list-item>`).reverse().join('') : Store.state.todos.length > 0 && this.filter === 'in-progres' ? 
                     Store.state.todos.filter(todo => !todo.completed).map(todo => `<list-item text="${todo.text}" completed="${todo.completed}" id="${todo._id}">
                     <span slot="done"><i class="far fa-check-circle done"></i></span>
                     <span slot="delete"><i class="far fa-times-circle delete"></i></i></span>
-                </list-item>`).reverse(): `<h2 class="no-todos">There is no todos</h2>`}
+                </list-item>`).reverse().join(''): `<h2 class="no-todos">There is no todos</h2>`}
                 </div>
                 <list-info></list-info>
             </div>

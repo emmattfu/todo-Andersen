@@ -7,7 +7,7 @@ template.innerHTML = `
 .todo-info {
     padding: 20px;
     background-color: #1976D2;
-   
+    border-radius: 10px;
 }
 .todo-info-text {
     color: white;
